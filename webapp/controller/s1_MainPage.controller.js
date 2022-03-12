@@ -11,7 +11,39 @@ sap.ui.define([
         /* Métodos de lifecycle da UI/VIEW */
         onInit: function () {
             this._ApprovePopup = new ApprovePopup(this); 
+
+            /*(var oObject = { 
+                treinamento: "FIORI NTT 2022", 
+                showMessage: function() { alert("Message " + this.treinamento); }
+            }; 
+            //oObject.showMessage(); 
+
+            var oObjectChild = 
+                $.extend(null, oObject, {
+                    turma: [], 
+                    appendAluno: function(sAluno) {
+                        this.turma.push(sAluno); 
+                    },  
+                    getTextAlunos: function() {
+                        var sText = ""; 
+                        for(var i = 0; i < this.turma.length; i++){
+                            sText = sText + this.turma[i] + ", ";
+                        }
+                        return sText; 
+                    }, 
+                    showMessage: function() { 
+                        alert("Message " + this.treinamento + "\n" + this.getTextAlunos()); 
+                    }
+                });
+
+            oObjectChild.appendAluno("Brenda");
+            oObjectChild.appendAluno("Eder");
+            oObjectChild.appendAluno("Valdeci");
+            oObjectChild.showMessage();
+            //alert(oObjectChild.getTextAlunos());*/
+
         }, 
+
         onBeforeRendering: function() {
 
         }, 

@@ -26,7 +26,7 @@ sap.ui.define([
 
         constructor: function(oController) {
             //this._oController = oController; 
-            $.extend(this, getMethods(oController));
+            $.extend(this, getMethods(oController));            
         }, 
 
         /*
