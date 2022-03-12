@@ -11,17 +11,18 @@
     "description": "{{appDescription}}",
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/",
+        "uri": "/sap/opu/odata/sap/ZGWNTTXX_SERV01_SRV/",
         "type": "OData",
         "settings": {
           "annotations": [],
           "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
+          "odataVersion": "2.0"
         }
       }
     }
   },
   "sap.ui": {
+    "fullWidth": true, 
     "technology": "UI5",
     "icons": {
       "icon": "",
@@ -60,6 +61,7 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {
+          "defaultBindingMode": "TwoWay", 
           "synchronizationMode": "None",
           "operationMode": "Server",
           "autoExpandSelect": true,
@@ -87,20 +89,51 @@
       },
       "routes": [
         {
-          "name": "RouteApp",
-          "pattern": "RouteApp",
+          "name": "MainPageRoute",
+          "pattern": "",
           "target": [
-            "TargetApp"
+            "MainPage"
+          ]
+        }, 
+        {
+          "name": "MainPageRoute2",
+          "pattern": "MainPage",
+          "target": [
+            "MainPage"
+          ]
+        }, 
+        {
+          "name": "NextPageRoute",
+          "pattern": "NextPage/:companyId:",
+          "target": [
+            "NextPage"
+          ]
+        }, 
+        {
+          "name": "NextPageRoute2",
+          "pattern": "NextPage/companyId={companyId}",
+          "target": [
+            "NextPage"
           ]
         }
       ],
       "targets": {
-        "TargetApp": {
+        "MainPage": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "App",
-          "viewName": "App"
+          "viewId": "s1_MainPage",
+          "viewName": "s1_MainPage", 
+          "viewLevel": 1
+        }, 
+
+        "NextPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "s2_NextPage",
+          "viewName": "s2_NextPage", 
+          "viewLevel": 2
         }
       }
     },

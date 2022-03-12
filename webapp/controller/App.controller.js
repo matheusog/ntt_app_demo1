@@ -1,13 +1,13 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "com/nttdata/sap/training2022/mog/ca/appdemo1/controller/BaseController"
 ],
     /**
-     * @param {typeof sap.ui.core.mvc.Controller} Controller
+     * @param {typeof com.nttdata.sap.training2022.mog.ca.appdemo1.controller.BaseController} BaseController
      */
-    function (Controller) {
+    function (BaseController) {
         "use strict";
 
-        return Controller.extend("com.nttdata.sap.training2022.mog.ca.appdemo1.controller.App", {
+        return BaseController.extend("com.nttdata.sap.training2022.mog.ca.appdemo1.controller.App", {
             onInit: function () {
 
             }

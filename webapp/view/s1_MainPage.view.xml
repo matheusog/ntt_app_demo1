@@ -1,0 +1,15 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="com.nttdata.sap.training2022.mog.ca.appdemo1.controller.s1_MainPage">
+    <Page id="page" title="{i18n>title}">
+        <Text text="Hello!" />
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button type="Transparent" text="Next Page" press=".onNextPress"/>
+                <Button type="Negative" text="Exit" />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
