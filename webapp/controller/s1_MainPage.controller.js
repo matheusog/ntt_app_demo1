@@ -1,6 +1,7 @@
 sap.ui.define([
-    "com/nttdata/sap/training2022/mog/ca/appdemo1/controller/BaseController"
-], function(Controller) {
+    "com/nttdata/sap/training2022/mog/ca/appdemo1/controller/BaseController", 
+    "com/nttdata/sap/training2022/mog/ca/appdemo1/model/ApprovePopup"
+], function(Controller, ApprovePopup) {
     "use strict";  
 
     /**
@@ -9,7 +10,7 @@ sap.ui.define([
     return Controller.extend("com.nttdata.sap.training2022.mog.ca.appdemo1.controller.s1_MainPage", {
         /* Métodos de lifecycle da UI/VIEW */
         onInit: function () {
-
+            this._ApprovePopup = new ApprovePopup(this); 
         }, 
         onBeforeRendering: function() {
 
@@ -35,6 +36,12 @@ sap.ui.define([
                 "companyId": "1000"
             });
 
+        }, 
+        
+        onApprovePress: function(oEvent) {
+            let oButton = oEvent.getSource(); 
+            let sText = "Click do button: " + oButton.getText() + " id: " + oButton.getId(); 
+            this._ApprovePopup.alertMessage(sText); 
         }
         
     });

@@ -8,7 +8,7 @@
             <Toolbar>
                 <ToolbarSpacer />
                 <Button type="Transparent" text="Next Page" press=".onNextPress"/>
-                <Button type="Negative" text="Exit" />
+                <Button type="Positive" text="Aprovar" press=".onApprovePress" />
             </Toolbar>
         </footer>
     </Page>
