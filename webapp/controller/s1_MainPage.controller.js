@@ -10,7 +10,8 @@ sap.ui.define([
     return Controller.extend("com.nttdata.sap.training2022.mog.ca.appdemo1.controller.s1_MainPage", {
         /* Métodos de lifecycle da UI/VIEW */
         onInit: function () {
-            this._ApprovePopup = new ApprovePopup(this); 
+            this._ApprovePopup      = new ApprovePopup(this); 
+            this._oListCustomers    = this.getView().byId("listCustomers"); 
 
             /*(var oObject = { 
                 treinamento: "FIORI NTT 2022", 
@@ -70,6 +71,30 @@ sap.ui.define([
 
         }, 
         
+        onListAction: function(oEvent) {
+            let oList = oEvent.getSource().getParent().getParent();
+            if(!oList) { return; }
+
+            /*
+            let aItems = oList.getItems();
+            aItems.forEach((oItem, iIndex) => {
+                //let oStatus = oItem.getFirstStatus();
+                //oStatus.setState(sap.ui.core.ValueState.Error);
+                let oBinding = oItem.getBindingContext("myData");
+                let oObject = oBinding.getObject();
+                oObject.valueState = sap.ui.core.ValueState.Error; 
+            });
+            */
+
+            let sPath = oList.getBindingInfo("items").path; 
+            let aCustomers = this.getModel("myData").getProperty(sPath);
+            aCustomers.forEach((oCustomer, iIndex) => {
+                oCustomer.valueState = sap.ui.core.ValueState.Error; 
+            });
+
+
+        }, 
+
         onApprovePress: function(oEvent) {
             let oButton = oEvent.getSource(); 
             let sText = "Click do button: " + oButton.getText() + " id: " + oButton.getId(); 

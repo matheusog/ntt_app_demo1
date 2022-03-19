@@ -2,17 +2,32 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     controllerName="com.nttdata.sap.training2022.mog.ca.appdemo1.controller.s1_MainPage">
-    <Page id="page" title="{i18n>title}" class="sapUiResponsiveMargin">
+    <Page id="page" title="{i18n>title}" class="sapUiResponsiveContentPadding">
         <List
+            id="listCustomers"
             items="{myData>/data/customers}">
-            <CustomListItem class="sapUiTinyMarginBegin"> 
-                <ObjectIdentifier
-                    text="{myData>id}"
-                    title="{myData>name}"
-                />
- 
-            </CustomListItem>                  
-                    
+            <headerToolbar>
+                <Toolbar>
+                        <Title
+                            text="{i18n>title}"
+                        />
+                        <ToolbarSpacer />
+                        <Button text="{i18n>s1.button.listAction}" 
+                            type="Emphasized"
+                            press=".onListAction" />
+                </Toolbar>
+            </headerToolbar>
+            <ObjectListItem title="{myData>name}">
+                <attributes>
+                    <ObjectAttribute
+                        text="{myData>id}" />
+                </attributes>
+                <firstStatus>
+                    <ObjectStatus
+                        text="{myData>adress/region}"
+                        state="{myData>valueState}" />
+                </firstStatus>
+            </ObjectListItem>
         </List>
         <footer>
             <Toolbar>

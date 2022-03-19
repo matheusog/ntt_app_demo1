@@ -8,16 +8,18 @@
                     "street": "Av dos Ararapés, 999", 
                     "region": "SP", 
                     "country": "BR"
-                }
+                },
+                "valueState": "Success"
             }, 
-            { 
+            {                 
                 "id": "101013", 
                 "name": "Nike do Brasil", 
                 "adress": {
                     "street": "Av dos Ararapés, 999", 
                     "region": "SP", 
                     "country": "BR"
-                }
+                }, 
+                "valueState": "Success"
             }, 
             { 
                 "id": "101014", 
@@ -26,7 +28,8 @@
                     "street": "Av dos Ararapés, 999", 
                     "region": "SP", 
                     "country": "BR"
-                }
+                },
+                "valueState": "Success"
             }
         ]
     }
