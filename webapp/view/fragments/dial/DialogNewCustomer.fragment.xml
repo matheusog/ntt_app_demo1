@@ -1,0 +1,22 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <Dialog
+        title="{i18n>dial.newCust.title}">        
+        <content>
+            <form:SimpleForm> 
+                <Label labelFor="CustomerName" text="Nome do Cliente" />
+                <Input value="{CustomerName}" id="CustomerName" />
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="{i18n>dial.button.create}" press=".onCreate" />    
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>dial.button.cancel}" press=".onCancel" />    
+        </endButton>
+       
+    </Dialog>
+</c:FragmentDefinition>

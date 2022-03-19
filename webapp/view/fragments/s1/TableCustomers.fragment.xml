@@ -30,6 +30,12 @@
                 
             }
         }">
+        <headerToolbar>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button icon="sap-icon://add" tooltip="{i18n>s1.button.add}" press=".onAddNew" /> 
+            </Toolbar>
+        </headerToolbar>
         <columns>
             <Column>
                 <Text text="{i18n>s1.column.idCustomer}" />

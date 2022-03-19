@@ -1,8 +1,11 @@
 sap.ui.define([
+    "sap/ui/core/Fragment", 
+    "sap/ui/model/json/JSONModel", 
     "com/nttdata/sap/training2022/mog/ca/appdemo1/controller/BaseController", 
     "com/nttdata/sap/training2022/mog/ca/appdemo1/model/ApprovePopup", 
     "com/nttdata/sap/training2022/mog/ca/appdemo1/model/models"
-], function(Controller, ApprovePopup, models) {
+    
+], function(Fragment, JSONModel, Controller, ApprovePopup, models) {
     "use strict";  
 
     /**
@@ -15,15 +18,16 @@ sap.ui.define([
             this._oListCustomers    = this.getView().byId("listCustomers"); 
 
             // @ts-ignore
+            /*
             this.getModel().setSizeLimit(10); 
             this._readDataFromOdataService("/I_Customer")
                 .then((oSuccess) => {
-                    alert(oSuccess); 
+                    //alert(oSuccess); 
                 })
                 .catch((oError) => {
-                    alert(oError);
+                    //alert(oError);
                 }); 
-
+            */
             this.getView().setModel(
                 models.createViewModel({
                     iconTab: {
@@ -118,10 +122,82 @@ sap.ui.define([
             this._getData(true); 
         }, 
 
+        onCreate: function(oEvent) {
+            var oDialog = oEvent.getSource().getParent(); 
+            this._createNewCustomer(oDialog.getModel())
+                .then(() => {                    
+                    oDialog.close(); 
+                })
+                .catch((oError) => {
+                    
+                })
+        }, 
+
+        onCancel: function(oEvent) {
+            let oDialog = oEvent.getSource().getParent(); 
+            oDialog.close();
+        },
+
         onApprovePress: function(oEvent) {
             let oButton = oEvent.getSource(); 
-            let sText = "Click do button: " + oButton.getText() + " id: " + oButton.getId(); 
+            let sText = "Click do button: " + oButton.getText() + " id: " + oButton.getId();             
             this._ApprovePopup.alertMessage(sText); 
+        }, 
+
+        onAddNew: function(oEvent) {
+            new Promise((fnResolve, fnReject) => {
+                if(!this._oDialogNewCustomer) {
+                    //this._oDialogNewCustomer
+
+                    let sName = "com.nttdata.sap.training2022.mog.ca.appdemo1.view.fragments.dial.DialogNewCustomer"; 
+                    if(Fragment.load) {
+                        return Fragment.load({id: this.getView().getId(), name: sName, controller: this, type: "XML"})
+                            .then(fnResolve).catch(fnReject);
+                    } else {
+                        fnResolve(sap.ui.xmlfragment(this.getView().getId(), sName, this));
+                        
+                    }
+                } else { fnResolve(this._oDialogNewCustomer); }
+            }).then((oFragment) => {
+                this._oDialogNewCustomer = oFragment; 
+                oFragment.setModel(this.getModel("i18n"), "i18n"); 
+
+                /*
+                oFragment.setModel(new JSONModel({
+                    "CustomerName": "", 
+                    "Country": "", 
+                    "Region": ""
+                }), "Input"); 
+                oFragment.getContent()[0].bindElement({ path: "Input>/" }); */
+
+                
+                let sPath = "/" + this.getModel().createEntry("I_Customer").getPath(); 
+                oFragment.setModel(this.getModel()); 
+                oFragment.bindObject({
+                    path: sPath
+                }); 
+                oFragment.open(); 
+            }); 
+        },
+
+        _createNewCustomer: function(oModel) {
+            return new Promise((fnResolve, fnReject) => {
+                if(!oModel) { fnReject("Erro!"); }
+                
+                if(oModel instanceof JSONModel ) {
+
+                    let oObject = oModel.getProperty("/"); 
+                    this.getModel().create("/I_Customer", oObject, { 
+                        success: fnResolve, 
+                        error: fnReject, 
+                        refreshAfterChange: false
+                    }); 
+
+                } else {
+                    
+                    oModel.submitChanges({success: fnResolve, error: fnReject}); 
+                }                
+            }); 
         }, 
 
         _getData: function(bRefresh) {
