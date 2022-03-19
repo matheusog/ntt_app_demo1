@@ -33,6 +33,7 @@
                         />
                         <ToolbarSpacer />
                         <Button text="{i18n>s1.button.listAction}" 
+                            icon="sap-icon://refresh"
                             type="Emphasized"
                             press=".onListAction" />
                 </Toolbar>

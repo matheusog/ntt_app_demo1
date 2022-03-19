@@ -1,6 +1,7 @@
 {
     "data": {
-        "customers": [
+        "customers": [], 
+        "customersOld": [
             { 
                 "id": "101012", 
                 "name": "Matheus Goulart", 

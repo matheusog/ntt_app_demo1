@@ -19,6 +19,10 @@ server:
         backend:
           - path: /sap
             url: http://sapjvlpas001.fh.com.br:8000/
+            auth: basic
+            credentials:
+              username: env:UI5_USER
+              password: env:UI5_PASS
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

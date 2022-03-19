@@ -12,6 +12,8 @@ sap.ui.define([
         onInit: function () {
             this._ApprovePopup      = new ApprovePopup(this); 
             this._oListCustomers    = this.getView().byId("listCustomers"); 
+            this._getData(false); 
+
 
             /*(var oObject = { 
                 treinamento: "FIORI NTT 2022", 
@@ -72,10 +74,11 @@ sap.ui.define([
         }, 
         
         onListAction: function(oEvent) {
+            /*
             let oList = oEvent.getSource().getParent().getParent();
             if(!oList) { return; }
 
-            /*
+            
             let aItems = oList.getItems();
             aItems.forEach((oItem, iIndex) => {
                 //let oStatus = oItem.getFirstStatus();
@@ -84,22 +87,92 @@ sap.ui.define([
                 let oObject = oBinding.getObject();
                 oObject.valueState = sap.ui.core.ValueState.Error; 
             });
-            */
-
+            
             let sPath = oList.getBindingInfo("items").path; 
             let aCustomers = this.getModel("myData").getProperty(sPath);
             aCustomers.forEach((oCustomer, iIndex) => {
                 oCustomer.valueState = sap.ui.core.ValueState.Error; 
             });
             this.getModel("myData").updateBindings(true);
+            */
 
+            this._getData(true); 
         }, 
 
         onApprovePress: function(oEvent) {
             let oButton = oEvent.getSource(); 
             let sText = "Click do button: " + oButton.getText() + " id: " + oButton.getId(); 
             this._ApprovePopup.alertMessage(sText); 
+        }, 
+
+        _getData: function(bRefresh) {
+            
+            var sUrl = "/sap/opu/odata/sap/ZGWNTTXX_SERV01_SRV/I_Customer?$format=json&$select=Customer,CustomerName,Country,Region,StreetName"; 
+            //validateInput().then()
+            this._readToken(sUrl)
+                .then((sToken) => {
+                    return this._readData(bRefresh, sUrl);
+                })            
+                .then((aCustomersService) => {
+                    
+                    var aCustomers = [];
+                    aCustomersService.forEach((oItem, iIndex) => {
+                        aCustomers.push(this._mapCustomerDataFromService(oItem));
+                    }); 
+
+                    this.getModel("myData").setProperty("/data/customers", aCustomers);
+                }).catch((oError) => {
+                    alert("Erro ocorreu"); 
+                });
+        }, 
+
+        _mapCustomerDataFromService: function(oServiceData) {
+
+            return {
+                id: oServiceData.Customer, 
+                name: oServiceData.CustomerName, 
+                adress: {
+                    country: oServiceData.Country,
+                    region: oServiceData.Region, 
+                    street: oServiceData.Street
+                }
+            }; 
+
+        }, 
+
+        _readData: function(bRefresh, sUrl, sToken) {
+            return new Promise((fnResolve, fnReject) => {
+                //Código
+                $.ajax({
+                    "type": "GET",
+                    "contentType": "application/json", 
+                    "url": sUrl, 
+                    "dataType": "json", 
+                    "async": true,  
+                    "success": (oResponse) => {
+                        if (!oResponse || !oResponse.d.results || oResponse.d.results.length === 0) {
+                            //Error
+                            fnReject("Ocorreu um erro");
+                            return; 
+                        }
+
+                        fnResolve(oResponse.d.results); 
+                        
+                    },  
+                    "error": fnReject
+                }); 
+            });
+        }, 
+
+        _readToken: function(sUrl) {
+            return new Promise((fnResolve, fnReject) => {
+                //Leitura do Token
+                /*
+                setTimeout(() => {
+                    fnResolve("1234567890");
+                }, 5000 ); */
+                fnResolve("1234567890");
+            });
         }
-        
     });
 });
