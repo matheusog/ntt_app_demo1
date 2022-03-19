@@ -91,7 +91,7 @@ sap.ui.define([
             aCustomers.forEach((oCustomer, iIndex) => {
                 oCustomer.valueState = sap.ui.core.ValueState.Error; 
             });
-
+            this.getModel("myData").updateBindings(true);
 
         }, 
 

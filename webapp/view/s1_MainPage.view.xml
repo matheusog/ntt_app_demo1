@@ -5,7 +5,27 @@
     <Page id="page" title="{i18n>title}" class="sapUiResponsiveContentPadding">
         <List
             id="listCustomers"
-            items="{myData>/data/customers}">
+            items="{
+                path: '/data/customers',
+                model: 'myData',
+                sorter: [{
+                    path: 'name', 
+                    descending: true
+                }], 
+                filters: {
+                    and: false,
+                    filters: [{
+                        path: 'adress/country', 
+                        operator: 'EQ', 
+                        value1: 'BR'
+                    }, 
+                    {
+                        path: 'adress/country', 
+                        operator: 'EQ', 
+                        value1: 'US'
+                    }]
+                }
+            }">
             <headerToolbar>
                 <Toolbar>
                         <Title
@@ -24,8 +44,14 @@
                 </attributes>
                 <firstStatus>
                     <ObjectStatus
-                        text="{myData>adress/region}"
-                        state="{myData>valueState}" />
+                        text="{
+                            path: 'myData>adress/region', 
+                            type: 'sap.ui.model.type.String'
+                        }"
+                        state="{
+                            parts: [{ path: 'myData>adress/region' }, { path: 'myData>adress/country' }], 
+                            formatter: '.oFormatter.formatValueState'
+                        }" />
                 </firstStatus>
             </ObjectListItem>
         </List>

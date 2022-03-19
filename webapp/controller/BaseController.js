@@ -1,14 +1,16 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller", 
-    "sap/ui/core/routing/History"
-], function(Controller, History) {
+    "sap/ui/core/routing/History", 
+    "../utils/formatter"
+], function(Controller, History, Formatter) {
     "use strict";  
 
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
     return Controller.extend("com.nttdata.sap.training2022.mog.ca.appdemo1.controller.BaseController", {
-        
+        oFormatter: Formatter, 
+
         /* Evento de Controls de UI/VIEW */ 
         onNavBack: function() {
             let oHistory = History.getInstance();

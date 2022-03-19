@@ -8,8 +8,7 @@
                     "street": "Av dos Ararapés, 999", 
                     "region": "SP", 
                     "country": "BR"
-                },
-                "valueState": "Success"
+                }
             }, 
             {                 
                 "id": "101013", 
@@ -18,9 +17,9 @@
                     "street": "Av dos Ararapés, 999", 
                     "region": "SP", 
                     "country": "BR"
-                }, 
-                "valueState": "Success"
+                }
             }, 
+
             { 
                 "id": "101014", 
                 "name": "NTT Data", 
@@ -28,9 +27,39 @@
                     "street": "Av dos Ararapés, 999", 
                     "region": "SP", 
                     "country": "BR"
-                },
-                "valueState": "Success"
+                }
+            }, 
+            
+            { 
+                "id": "101015", 
+                "name": "NTT Data US", 
+                "adress": {
+                    "street": "Av Washington, X1", 
+                    "region": "WA", 
+                    "country": "US"
+                }
+            }, 
+
+            {                 
+                "id": "101016", 
+                "name": "SumUp", 
+                "adress": {
+                    "street": "Av. Brasil, 289", 
+                    "region": "RJ", 
+                    "country": "BR"
+                }
+            }, 
+            
+            { 
+                "id": "101017", 
+                "name": "NORIS LTDA", 
+                "adress": {
+                    "street": "Av la Bombonera, 222", 
+                    "region": "BU", 
+                    "country": "AR"
+                }
             }
+
         ]
     }
 
