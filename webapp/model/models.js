@@ -1,5 +1,6 @@
 sap.ui.define([
-    "sap/ui/model/json/JSONModel",
+    //"./CustomData", 
+    "sap/ui/model/json/JSONModel",    
     "sap/ui/Device"
 ], 
     /**
@@ -18,6 +19,12 @@ sap.ui.define([
                 var oModel = new JSONModel(Device);
                 oModel.setDefaultBindingMode("OneWay");
                 return oModel;
-        }
+            } 
+            /*
+            createDefaultModel: function() {
+                let oModel = new JSONModel(CustomData); 
+                oModel.setDefaultBindingMode("TwoWay"); 
+                return oModel; 
+            }*/
     };
 });

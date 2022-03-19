@@ -18,6 +18,11 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+
+      "jsonData": {
+        "uri": "model/CustomData.json", 
+        "type": "JSON"
       }
     }
   },
@@ -57,6 +62,13 @@
           "bundleName": "com.nttdata.sap.training2022.mog.ca.appdemo1.i18n.i18n"
         }
       },
+      "myData": {
+        "dataSource": "jsonData", 
+        "type": "sap.ui.model.json.JSONModel", 
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        }
+      }, 
       "": {
         "dataSource": "mainService",
         "preload": true,

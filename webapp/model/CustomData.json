@@ -1,0 +1,34 @@
+{
+    "data": {
+        "customers": [
+            { 
+                "id": "101012", 
+                "name": "Matheus Goulart", 
+                "adress": {
+                    "street": "Av dos Ararapés, 999", 
+                    "region": "SP", 
+                    "country": "BR"
+                }
+            }, 
+            { 
+                "id": "101013", 
+                "name": "Nike do Brasil", 
+                "adress": {
+                    "street": "Av dos Ararapés, 999", 
+                    "region": "SP", 
+                    "country": "BR"
+                }
+            }, 
+            { 
+                "id": "101014", 
+                "name": "NTT Data", 
+                "adress": {
+                    "street": "Av dos Ararapés, 999", 
+                    "region": "SP", 
+                    "country": "BR"
+                }
+            }
+        ]
+    }
+
+}

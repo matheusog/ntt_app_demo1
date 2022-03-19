@@ -2,13 +2,23 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     controllerName="com.nttdata.sap.training2022.mog.ca.appdemo1.controller.s1_MainPage">
-    <Page id="page" title="{i18n>title}">
-        <Text text="Hello!" />
+    <Page id="page" title="{i18n>title}" class="sapUiResponsiveMargin">
+        <List
+            items="{myData>/data/customers}">
+            <CustomListItem class="sapUiTinyMarginBegin"> 
+                <ObjectIdentifier
+                    text="{myData>id}"
+                    title="{myData>name}"
+                />
+ 
+            </CustomListItem>                  
+                    
+        </List>
         <footer>
             <Toolbar>
                 <ToolbarSpacer />
                 <Button type="Transparent" text="Next Page" press=".onNextPress"/>
-                <Button type="Positive" text="Aprovar" press=".onApprovePress" />
+                <Button type="Accept" text="Aprovar" press=".onApprovePress" />
             </Toolbar>
         </footer>
     </Page>

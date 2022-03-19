@@ -18,7 +18,7 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				let oRouter = this.getRouter();
-				oRouter.navTo("MainPageRoute2", true);
+				oRouter.navTo("MainPageRoute2", null, true);
 			}
         }, 
 
