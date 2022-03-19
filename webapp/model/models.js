@@ -19,7 +19,16 @@ sap.ui.define([
                 var oModel = new JSONModel(Device);
                 oModel.setDefaultBindingMode("OneWay");
                 return oModel;
-            } 
+            }, 
+
+            createViewModel: function (oObject) {
+                let oTemplate = $.extend({ 
+                    "busy": false, 
+                    "delay": 10
+                }, oObject); 
+                let oModel = new JSONModel(oTemplate);
+                return oModel;
+            }
             /*
             createDefaultModel: function() {
                 let oModel = new JSONModel(CustomData); 

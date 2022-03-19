@@ -1,0 +1,61 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Table
+        visible="{= ${s1Model>/iconTab/selectedKey} === 'odataModel' }"                 
+        growingThreshold="10"
+        growing="true"
+        items="{
+            path: '/I_Customer', 
+            sorter: [{
+                    path: 'CustomerName', 
+                    descending: true
+            }], 
+            filters: {
+                and: false,
+                filters: [{
+                    path: 'Country', 
+                    operator: 'EQ', 
+                    value1: 'BR'
+                }, 
+                {
+                    path: 'Country', 
+                    operator: 'EQ', 
+                    value1: 'US'
+                }]
+            },
+            parameters: {            
+                select: 'Customer,CustomerName,StreetName,Region,Country'
+                
+            }
+        }">
+        <columns>
+            <Column>
+                <Text text="{i18n>s1.column.idCustomer}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>s1.column.street}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>s1.column.region}" />
+            </Column>
+            <Column>
+                <Text text="{i18n>s1.column.country}" />
+            </Column>                  
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <VBox> 
+                        <Text text="{CustomerName}" />
+                        <Text text="{Customer}" />
+                    </VBox>
+                    <Text text="{StreetName}" />
+                    <Text text="{Region}" />
+                    <Text text="{Country}" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</c:FragmentDefinition>

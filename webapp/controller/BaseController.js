@@ -24,6 +24,9 @@ sap.ui.define([
 			}
         }, 
 
+        /**
+         * @param {string} ?sModel
+         * **/
         getModel: function(sModel)  {
             return this.getOwnerComponent().getModel(sModel); 
         }, 

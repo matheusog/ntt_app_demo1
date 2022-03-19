@@ -1,7 +1,8 @@
 sap.ui.define([
     "com/nttdata/sap/training2022/mog/ca/appdemo1/controller/BaseController", 
-    "com/nttdata/sap/training2022/mog/ca/appdemo1/model/ApprovePopup"
-], function(Controller, ApprovePopup) {
+    "com/nttdata/sap/training2022/mog/ca/appdemo1/model/ApprovePopup", 
+    "com/nttdata/sap/training2022/mog/ca/appdemo1/model/models"
+], function(Controller, ApprovePopup, models) {
     "use strict";  
 
     /**
@@ -12,6 +13,24 @@ sap.ui.define([
         onInit: function () {
             this._ApprovePopup      = new ApprovePopup(this); 
             this._oListCustomers    = this.getView().byId("listCustomers"); 
+
+            // @ts-ignore
+            this.getModel().setSizeLimit(10); 
+            this._readDataFromOdataService("/I_Customer")
+                .then((oSuccess) => {
+                    alert(oSuccess); 
+                })
+                .catch((oError) => {
+                    alert(oError);
+                }); 
+
+            this.getView().setModel(
+                models.createViewModel({
+                    iconTab: {
+                        selectedKey: 0
+                    }
+                }), "s1Model");
+
             this._getData(false); 
 
 
@@ -107,6 +126,7 @@ sap.ui.define([
 
         _getData: function(bRefresh) {
             
+            this.getView().getModel("s1Model").setProperty("/busy", true); 
             var sUrl = "/sap/opu/odata/sap/ZGWNTTXX_SERV01_SRV/I_Customer?$format=json&$select=Customer,CustomerName,Country,Region,StreetName"; 
             //validateInput().then()
             this._readToken(sUrl)
@@ -121,7 +141,9 @@ sap.ui.define([
                     }); 
 
                     this.getModel("myData").setProperty("/data/customers", aCustomers);
+                    this.getView().getModel("s1Model").setProperty("/busy", false); 
                 }).catch((oError) => {
+                    this.getView().getModel("s1Model").setProperty("/busy", false); 
                     alert("Erro ocorreu"); 
                 });
         }, 
@@ -139,7 +161,7 @@ sap.ui.define([
             }; 
 
         }, 
-
+        
         _readData: function(bRefresh, sUrl, sToken) {
             return new Promise((fnResolve, fnReject) => {
                 //Código
@@ -164,13 +186,36 @@ sap.ui.define([
             });
         }, 
 
+        _readDataFromOdataService: function(sUrl) {
+            return new Promise((fnResolve, fnReject) => {
+                this.getModel().read(sUrl, {
+                    filters: [], 
+                    sorters: [],
+                    success: (oResponse) => {
+                        if (!oResponse || !oResponse.results || oResponse.results.length === 0) {
+                            //Error
+                            fnReject("Ocorreu um erro");
+                            return; 
+                        }
+
+                        fnResolve(oResponse.results); 
+                        
+                    }, 
+                    error: fnReject, 
+                    urlParameters: {
+                        $select: "Customer,CustomerName,StreetName,Region,Country"
+                    }
+                });
+            }); 
+        }, 
+
         _readToken: function(sUrl) {
             return new Promise((fnResolve, fnReject) => {
                 //Leitura do Token
                 /*
                 setTimeout(() => {
                     fnResolve("1234567890");
-                }, 5000 ); */
+                }, 5000 );*/
                 fnResolve("1234567890");
             });
         }
