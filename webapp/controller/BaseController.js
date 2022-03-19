@@ -26,6 +26,10 @@ sap.ui.define([
             return this.getOwnerComponent().getModel(sModel); 
         }, 
 
+        getResource: function() {
+            return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+        }, 
+
         getRouter: function() {
             return this.getOwnerComponent().getRouter(); 
         }

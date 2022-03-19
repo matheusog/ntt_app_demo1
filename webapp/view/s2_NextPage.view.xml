@@ -4,5 +4,6 @@
     controllerName="com.nttdata.sap.training2022.mog.ca.appdemo1.controller.s2_NextPage">
     <Page id="page" title="{i18n>pagina2}" showNavButton="true" navButtonPress=".onNavBack"> 
         <Text text="Você está na página seguinte" />
+        
     </Page>
 </mvc:View>
